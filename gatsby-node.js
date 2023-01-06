@@ -40,10 +40,10 @@ const digest = resource =>
 
 const parseVideos = (video, transformer) => {
   const videoID = video.uri.replace('/videos/', '');
-  const videoThumbnail = video.pictures.uri
-    .match(/\/pictures\/\w+/gi)[0]
-    .replace(/\/pictures\//gi, '');
-  const videoThumbnailUrl = `https://i.vimeocdn.com/video/${videoThumbnail}`;
+  const videoThumbnail = video.pictures.base_link;
+  console.log(videoThumbnail);
+  const videoThumbnailUrl = `${videoThumbnail}`;
+  console.log(videoThumbnailUrl);
 
   const userID = video.uri.replace('/users/', '');
   const userThumbnail = video.user.pictures.uri
@@ -89,6 +89,8 @@ const parseVideos = (video, transformer) => {
       },
     },
   };
+
+  console.log(videoInfo.thumbnail.medium);
 
   return transformer && typeof transformer === 'function' ? transformer(videoInfo) : videoInfo;
 };
